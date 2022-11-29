@@ -106,7 +106,10 @@ fn put_computer_to_sleep() {
 
 #[cfg(target_os = "linux")]
 fn put_computer_to_sleep() {
-    // do linux stuff
+    Command::new("systemctl")
+        .args(["suspend"])
+        .status()
+        .expect("failed to execute sleep command");
 }
 
 #[cfg(target_os = "macos")]
